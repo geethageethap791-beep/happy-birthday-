@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Yuti 🎂</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: Georgia, "Times New Roman", serif;
+    background:
+        radial-gradient(circle at 50% 30%, #292044 0%, #100d1c 45%, #05050a 100%);
+    color: white;
+}
+
+/* ---------- STARS ---------- */
+
+.stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: .2; transform: scale(.7); }
+    to { opacity: 1; transform: scale(1.4); }
+}
+
+/* ---------- START SCREEN ---------- */
+
+.start {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+    z-index: 10;
+    transition: opacity 1s, visibility 1s;
+}
+
+.start.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.start h1 {
+    font-size: 25px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.start p {
+    color: #d7cce8;
+    margin-bottom: 35px;
+}
+
+/* ---------- POSTCARD ---------- */
+
+.postcard {
+    width: 290px;
+    height: 190px;
+    position: relative;
+    cursor: pointer;
+    perspective: 1000px;
+    filter: drop-shadow(0 15px 30px rgba(0,0,0,.6));
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f4e7d0, #d9c19a);
+    border-radius: 8px;
+    position: relative;
+    color: #33251b;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 2px solid #f9edda;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px dashed #8b6c49;
+    border-radius: 5px;
+}
+
+.card h2 {
+    font-size: 25px;
+    z-index: 2;
+}
+
+.card p {
+    font-size: 14px;
+    z-index: 2;
+}
+
+.heart {
+    font-size: 35px;
+    z-index: 2;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    50% { transform: scale(1.15); }
+}
+
+.tap {
+    margin-top: 25px;
+    font-size: 14px;
+    color: #cdbce0;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    50% { opacity: .45; }
+}
+
+/* ---------- FIREWORKS ---------- */
+
+#fireworks {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 20;
+}
+
+/* ---------- LETTER ---------- */
+
+.letter-screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s;
+    z-index: 5;
+}
+
+.letter-screen.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.letter {
+    width: min(420px, 94vw);
+    max-height: 85vh;
+    overflow-y: auto;
+    background:
+        linear-gradient(135deg, #fffaf0, #f3dfb8);
+    color: #39291e;
+    border-radius: 10px;
+    padding: 30px 24px;
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.7),
+        0 0 30px rgba(255,215,150,.18);
+    border: 2px solid #f7e6c5;
+    transform: translateY(40px) scale(.85);
+    transition: transform 1s cubic-bezier(.2,.8,.2,1);
+    text-align: center;
+}
+
+.letter-screen.show .letter {
+    transform: translateY(0) scale(1);
+}
+
+.small {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #876a45;
+    margin-bottom: 15px;
+}
+
+.letter h1 {
+    font-size: clamp(28px, 8vw, 43px);
+    color: #8e2636;
+    margin-bottom: 18px;
+    line-height: 1.1;
+}
+
+.cake {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.letter p {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 14px;
+}
+
+.divider {
+    width: 80px;
+    height: 1px;
+    background: #b99464;
+    margin: 20px auto;
+}
+
+.signature {
+    font-style: italic;
+    margin-top: 22px;
+    color: #765438;
+}
+
+.surprise-btn {
+    margin-top: 22px;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 30px;
+    background: #8e2636;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(142,38,54,.3);
+}
+
+.surprise-btn:active {
+    transform: scale(.95);
+}
+
+/* ---------- FINAL SURPRISE ---------- */
+
+.final-message {
+    position: fixed;
+    inset: 0;
+    background: rgba(5,5,10,.94);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .8s;
+    text-align: center;
+}
+
+.final-message.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.final-box {
+    max-width: 400px;
+}
+
+.final-box .big {
+    font-size: 55px;
+    margin-bottom: 20px;
+}
+
+.final-box h2 {
+    font-size: 30px;
+    margin-bottom: 18px;
+}
+
+.final-box p {
+    color: #ddd;
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+.close {
+    margin-top: 25px;
+    padding: 11px 22px;
+    border: 1px solid #777;
+    background: transparent;
+    color: white;
+    border-radius: 25px;
+}
+
+/* ---------- CONFETTI ---------- */
+
+.confetti {
+    position: fixed;
+    top: -20px;
+    width: 8px;
+    height: 14px;
+    z-index: 200;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<!-- START -->
+<section class="start" id="start">
+
+    <h1>A little birthday surprise... 🎁</h1>
+    <p>Made especially for you, Yuti.</p>
+
+    <div class="postcard" onclick="openCard()">
+        <div class="card">
+            <div>
+                <h2>For Yuti 💌</h2>
+            </div>
+
+            <div class="heart">❤️</div>
+
+            <p>Open me...</p>
+        </div>
+    </div>
+
+    <div class="tap">✨ Tap the letter ✨</div>
+
+</section>
+
+
+<!-- FIREWORKS -->
+<canvas id="fireworks"></canvas>
+
+
+<!-- LETTER -->
+<section class="letter-screen" id="letterScreen">
+
+    <div class="letter">
+
+        <div class="small">A SPECIAL MESSAGE FOR YOU</div>
+
+        <div class="cake">🎂</div>
+
+        <h1>HAPPY<br>BIRTHDAY YUTI!</h1>
+
+        <div class="divider"></div>
+
+        <p>
+            Today is your day, so I just wanted to make
+            something a little different for you. ✨
+        </p>
+
+        <p>
+            I hope this year brings you countless reasons
+            to smile, beautiful memories, and lots of
+            happiness.
+        </p>
+
+        <p>
+            Keep being the person you are, keep chasing
+            the things that make you happy, and never
+            forget how special you are to the people
+            around you. ❤️
+        </p>
+
+        <p>
+            I hope your birthday is filled with good
+            moments, good people, and a little bit of
+            magic.
+        </p>
+
+        <div class="divider"></div>
+
+        <p class="signature">
+            Once again...<br>
+            Happy Birthday, Yuti! 🥳❤️
+        </p>
+
+        <button class="surprise-btn" onclick="finalSurprise()">
+            ✨ One More Surprise
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL -->
+<div class="final-message" id="finalMessage">
+
+    <div class="final-box">
+
+        <div class="big">🌟</div>
+
+        <h2>One last thing...</h2>
+
+        <p>
+            I hope this little surprise made you smile.
+            That's honestly all I wanted. 😊
+        </p>
+
+        <p style="margin-top:15px;">
+            Have an amazing birthday, Yuti. 🎂❤️
+        </p>
+
+        <button class="close" onclick="closeFinal()">
+            Close ✨
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ---------- STARS ---------- */
+
+const stars = document.getElementById("stars");
+
+for (let i = 0; i < 90; i++) {
+
+    const star = document.createElement("div");
+
+    star.className = "star";
+
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+
+    star.style.animationDelay =
+        Math.random() * 2 + "s";
+
+    stars.appendChild(star);
+}
+
+
+/* ---------- OPEN CARD ---------- */
+
+function openCard() {
+
+    document.getElementById("start")
+        .classList.add("hide");
+
+    setTimeout(() => {
+
+        document.getElementById("letterScreen")
+            .classList.add("show");
+
+        startFireworks();
+
+    }, 700);
+}
+
+
+/* ---------- FIREWORKS ---------- */
+
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+
+function resizeCanvas() {
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+}
+
+resizeCanvas();
+
+window.addEventListener("resize", resizeCanvas);
+
+
+function createFirework(x, y) {
+
+    for (let i = 0; i < 70; i++) {
+
+        const angle =
+            Math.random() * Math.PI * 2;
+
+        const speed =
+            Math.random() * 5 + 2;
+
+        particles.push({
+
+            x: x,
+            y: y,
+
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+
+            life: 80 + Math.random() * 30,
+
+            size: Math.random() * 2 + 1
+
+        });
+
+    }
+
+}
+
+
+function animateFireworks() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    particles.forEach((p, index) => {
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        p.vy += 0.04;
+
+        p.life--;
+
+        ctx.globalAlpha = p.life / 100;
+
+        ctx.fillStyle =
+            `hsl(${Math.random() * 360},100%,70%)`;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+        if (p.life <= 0) {
+
+            particles.splice(index, 1);
+
+        }
+
+    });
+
+    requestAnimationFrame(animateFireworks);
+
+}
+
+animateFireworks();
+
+
+function startFireworks() {
+
+    let count = 0;
+
+    const fireworks = setInterval(() => {
+
+        createFirework(
+            Math.random() * canvas.width,
+            Math.random() * canvas.height * .55
+        );
+
+        count++;
+
+        if (count >= 12) {
+
+            clearInterval(fireworks);
+
+        }
+
+    }, 500);
+
+}
+
+
+/* ---------- FINAL SURPRISE ---------- */
+
+function finalSurprise() {
+
+    document
+        .getElementById("finalMessage")
+        .classList.add("show");
+
+    createConfetti();
+
+}
+
+
+function createConfetti() {
+
+    for (let i = 0; i < 100; i++) {
+
+        const piece =
+            document.createElement("div");
+
+        piece.className = "confetti";
+
+        piece.style.left =
+            Math.random() * 100 + "vw";
+
+        piece.style.animationDuration =
+            (Math.random() * 3 + 2) + "s";
+
+        piece.style.background =
+            `hsl(${Math.random() * 360},90%,65%)`;
+
+        piece.style.transform =
+            `rotate(${Math.random() * 360}deg)`;
+
+        document.body.appendChild(piece);
+
+        setTimeout(() => {
+
+            piece.remove();
+
+        }, 5500);
+
+    }
+
+}
+
+
+function closeFinal() {
+
+    document
+        .getElementById("finalMessage")
+        .classList.remove("show");
+
+}
+
+</script>
+
+</body>
+</html>
